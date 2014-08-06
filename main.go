@@ -1,47 +1,49 @@
 package main
 
-import( 
-    "fmt"
-    "gopkg.in/mgo.v2"
-    "gopkg.in/mgo.v2/bson"
+import (
+	"fmt"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
-type Nome struct{
-		primeiro string `bson:"primeiro"`
-		nomeDoMeio string `bson:"nomeDoMeio"`
-		sobrenome string `bson:"sobrenome"`
-	}
-
-type Atleta struct{
-	nome Nome `bson:"nome"`
-	email string `bson:"email"`
+type Nome struct {
+	Primeiro   string `bson:"primeiro"`
+	NomeDoMeio string `bson:"nomeDoMeio"`
+	Sobrenome  string `bson:"sobrenome"`
 }
 
+type Atleta struct {
+	Id    bson.ObjectId `bson:"_id" json:"id"`
+	Nome  Nome          `bson:"nome"`
+	Email string        `bson:"email"`
+}
 
-
-func main(){
+func main() {
 
 	// Nome:{Primeiro:"teste"},
 
-	atleta := Atleta{nome:Nome{primeiro:"teste",nomeDoMeio:"do",sobrenome:"teste"},email:"teste@teste"}
+	atleta := Atleta{Nome: Nome{Primeiro: "teste", NomeDoMeio: "do", Sobrenome: "teste"}, Email: "teste@teste"}
+
+	atleta.Id = bson.NewObjectId()
+
 	// atleta.Email = "teste@teste"
 
-	// Nome:{Primeiro:"teste"}, 
+	// Nome:{Primeiro:"teste"},
 	// {Email:}
 
 	fmt.Println(atleta)
 
-	  sess, err := mgo.Dial("mongodb://mega:megamega@kahana.mongohq.com:10089/MegaRunning")
-	  if err != nil {
-	    fmt.Printf("Can't connect to mongo, go error %v\n", err)
-//	    os.Exit(1)
-	  }
-	  defer sess.Close()
+	sess, err := mgo.Dial("mongodb://mega:megamega@kahana.mongohq.com:10089/MegaRunning")
+	if err != nil {
+		fmt.Printf("Can't connect to mongo, go error %v\n", err)
+		//	    os.Exit(1)
+	}
+	defer sess.Close()
 
-    collection := sess.DB("MegaRunning").C("Atleta")
+	collection := sess.DB("MegaRunning").C("Atleta")
 
-    err = collection.Insert(bson.M(atleta))
-//	go get gopkg.in/mgo.v2
-    fmt.Println(err)
+	err = collection.Insert(&atleta)
+	//	go get gopkg.in/mgo.v2
+	fmt.Println(err)
 
 }

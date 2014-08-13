@@ -4,17 +4,19 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
-var sessao *mgo.Session
+var session *mgo.Session
 
-func GetSessao() (*mgo.Session, error) {
-	if sessao != nil {
-		return sessao, nil
-	} else {
-		sessao, err := mgo.Dial("mongodb://mega:megamega@kahana.mongohq.com:10089/MegaRunning")
+func GetDb() *mgo.Database {
+	if session == nil {
+		var err error
+		session, err = mgo.Dial("mongodb://mega:megamega@kahana.mongohq.com:10089/MegaRunning")
 		if err != nil {
-			return nil, err
-		} else {
-			return sessao, nil
+			panic(err) // no, not really
 		}
 	}
+	return session.Clone().DB("MegaRunning")
+}
+
+func CloseSession(){
+	session.Close()
 }

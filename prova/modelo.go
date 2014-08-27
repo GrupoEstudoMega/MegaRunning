@@ -20,3 +20,12 @@ type Participacao struct {
 	ValorPatrocinio float32 `bson:"valorpatrocinio"`
 	Atleta          atleta.Atleta
 }
+
+type ProvaJSON struct {
+    Prova Prova `json:"prova"`
+}
+
+
+type ProvasJSON struct {
+    Provas []Prova `json:"provas"`
+}

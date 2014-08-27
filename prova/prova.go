@@ -17,7 +17,8 @@ func Handler(response http.ResponseWriter, request *http.Request) {
 	case "GET":
 		provas := Provas()
 		fmt.Println(provas)
-		js, _ := json.MarshalIndent(provas, " ", "   ")
+		//js, _ := json.MarshalIndent(provas, " ", "   ")
+		js, _ := json.MarshalIndent(ProvasJSON{Provas: provas}, " ", "   ")
 		response.Write(js)
 		//resp := json.NewEncoder(response)
 		//resp.Encode(provas)

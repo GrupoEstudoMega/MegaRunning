@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	http.HandleFunc("/prova", prova.Handler)
+	http.HandleFunc("/provas", prova.Handler)
 	fs := http.Dir("public/")
 	http.Handle("/", http.FileServer(fs))
 	fmt.Println("Rodando na porta 8080")

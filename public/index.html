@@ -1,5 +1,21 @@
-<html>
+<!doctype html>
+<html lang="pt" ng-app="megaRunningApp">
+<head>
+  <meta charset="utf-8">
+  <title>My HTML File</title>
+
+  <script src="js/vendor/angular.js"></script>
+  <script src="js/vendor/angular-route.js"></script>
+  <script src="js/vendor/angular-resource.js"></script>
+  <script src="js/app.js"> </script>
+  
+  <script src="js/routes.js"> </script>
+  <script src="js/resource/provaCtrl.js"> </script>
+</head>
 <body>
-"Hello"
+  <div>
+    <a href='/provas'>teste</a>
+  	<div ng-view></div>
+  </div>
 </body>
 </html>

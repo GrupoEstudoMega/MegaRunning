@@ -2,9 +2,9 @@
 
 /* Controllers */
 
-var MegaRunningApp = angular.module('megaRunningApp', []);
+var megaRunningControllers = angular.module('megaRunningControllers', []);
 
-MegaRunningApp.controller('ProvasListaCtrl', function($scope) {
+megaRunningControllers.controller('ProvasListaCtrl', function($scope) {
   $scope.provas = [
     {
 	  _id: "53e2a47e33e6261e20000002",

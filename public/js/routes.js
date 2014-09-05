@@ -1,5 +1,8 @@
-console.log(megaRunningApp)
-megaRunningApp.config(['$routeProvider',
+'use strict';
+
+var megaRunningRoute = angular.module('megaRunningRoute', []);
+
+megaRunningRoute.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/provas', {

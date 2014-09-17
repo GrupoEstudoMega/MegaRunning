@@ -14,6 +14,7 @@ var collection *mgo.Collection = conexao.GetDb().C("Prova")
 
 func Handler(response http.ResponseWriter, request *http.Request) {
 	fmt.Println(request.Method)
+	fmt.Println("Entrou no handler")
 
 	switch request.Method {
 	case "GET":
@@ -21,22 +22,12 @@ func Handler(response http.ResponseWriter, request *http.Request) {
 		fmt.Println(provas)
 		js, _ := json.MarshalIndent(provas, " ", "   ")
 		response.Write(js)
-		//resp := json.NewEncoder(response)
-		//resp.Encode(provas)
-
-	case "POST":
-		var prova Prova
-		json.NewDecoder(request.Body).Decode(&prova)
-		err := Insere(&prova)
-		fmt.Println(err)
-
-		//case "DELETE":
-
 	}
 }
 
 func HandlerId(response http.ResponseWriter, request *http.Request) {
 	fmt.Println(request.Method)
+	fmt.Println("Entrou no handlerId")
 
 	switch request.Method {
 	case "GET":
@@ -56,6 +47,18 @@ func HandlerId(response http.ResponseWriter, request *http.Request) {
 				err := Insere(&prova)
 				fmt.Println(err)
 		*/
+
+	case "POST":
+		var prova Prova
+		json.NewDecoder(request.Body).Decode(&prova)
+		fmt.Println("prova.Id")
+		if prova.Id == "" {
+			err := Insere(&prova)
+			fmt.Println(err)
+		} else {
+			err := Update(&prova)
+			fmt.Println(err)
+		}
 
 		//case "DELETE":
 
@@ -79,5 +82,12 @@ func Insere(prova *Prova) error {
 	prova.Id = bson.NewObjectId()
 	fmt.Println(prova)
 	return collection.Insert(prova)
+
+}
+
+func Update(prova *Prova) error {
+
+	fmt.Println(prova.Id)
+	return collection.Update(bson.M{"_id": prova.Id}, &prova)
 
 }

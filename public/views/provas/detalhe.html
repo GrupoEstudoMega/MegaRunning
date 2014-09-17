@@ -1,0 +1,10 @@
+<div>
+  <form name="ProvaEdit" ng-submit="submit()" ng-controller="DetalheCtrl">
+    <p>{{prova.id}}</p>
+    Nome: <input type="text" ng-model="prova.Nome"></input>
+    Local: <input type="text" ng-model="prova.Local"></input>
+    Url: <input type="url" ng-model="prova.Url"></input>
+    Valor: <input type="number" ng-model="prova.Valor"></input>
+    <input type="submit" id="submit" value="Gravar">
+  </form>
+</div>

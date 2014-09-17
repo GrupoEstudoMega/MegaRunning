@@ -1,8 +1,7 @@
 <div>
   <ul>
     <li ng-repeat="prova in provas">
-            {{prova.Nome}}
-            <p><b>R$</b> {{prova.Valor}}</p>
+            <a href="#/provas/{{prova.id}}">{{prova.Nome}}</a>
     </li>
   </ul>
   <p>Qtde: {{provas.length}}</p>

@@ -9,7 +9,7 @@ var session *mgo.Session
 func GetDb() *mgo.Database {
 	if session == nil {
 		var err error
-		session, err = mgo.Dial("mongodb://mega:megamega@kahana.mongohq.com:10089/MegaRunning")
+		session, err = mgo.Dial("mongodb://mega:megamega@kahana.mongohq.com:10094/MegaRunning")
 		if err != nil {
 			panic(err) // no, not really
 		}
@@ -17,6 +17,6 @@ func GetDb() *mgo.Database {
 	return session.Clone().DB("MegaRunning")
 }
 
-func CloseSession(){
+func CloseSession() {
 	session.Close()
 }

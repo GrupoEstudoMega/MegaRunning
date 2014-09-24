@@ -22,6 +22,12 @@ func Handler(response http.ResponseWriter, request *http.Request) {
 		fmt.Println(provas)
 		js, _ := json.MarshalIndent(provas, " ", "   ")
 		response.Write(js)
+
+	case "POST":
+		var prova Prova
+		json.NewDecoder(request.Body).Decode(&prova)
+		err := Insere(&prova)
+		fmt.Println(err)
 	}
 }
 
@@ -38,15 +44,6 @@ func HandlerId(response http.ResponseWriter, request *http.Request) {
 		fmt.Println(prova)
 		js, _ := json.MarshalIndent(prova, " ", "   ")
 		response.Write(js)
-		//resp := json.NewEncoder(response)
-		//resp.Encode(provas)
-		/*
-			case "PUT":
-				var prova Prova
-				json.NewDecoder(request.Body).Decode(&prova)
-				err := Insere(&prova)
-				fmt.Println(err)
-		*/
 
 	case "POST":
 		var prova Prova
@@ -60,8 +57,11 @@ func HandlerId(response http.ResponseWriter, request *http.Request) {
 			fmt.Println(err)
 		}
 
-		//case "DELETE":
-
+	case "DELETE":
+		vars := mux.Vars(request)
+		id := bson.ObjectIdHex(vars["id"])
+		err := Delete(id)
+		fmt.Println(err)
 	}
 }
 
@@ -89,5 +89,12 @@ func Update(prova *Prova) error {
 
 	fmt.Println(prova.Id)
 	return collection.Update(bson.M{"_id": prova.Id}, &prova)
+
+}
+
+func Delete(id bson.ObjectId) error {
+
+	fmt.Println(id)
+	return collection.RemoveId(id)
 
 }

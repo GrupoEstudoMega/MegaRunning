@@ -23,8 +23,10 @@ megaRunningControllers.controller('DetalheCtrl', ['$scope', '$routeParams', '$wi
 megaRunningControllers.controller('NewCtrl', ['$scope', '$routeParams', '$window', 'Prova',
   function($scope, $routeParams, $window, Prova) {
   	$scope.prova = new Prova();
+  	$scope.prova.Valor = 0;
     $scope.submit = function() {
     	$scope.prova.$save();
     	$window.location.href = '#/provas';
     };
   }]);
+

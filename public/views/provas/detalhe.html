@@ -7,9 +7,18 @@
     Url: <input type="url" ng-model="prova.Url"></input>
     Valor: <input type="text" name="valor" ng-model="prova.Valor" pattern=/^\-?\d+((\.|\,)\d+)?$/ oninvalid="this.setCustomValidity('Valor inválido')"></input>
     {{prova.Valor}}
+
+    <table>
+    	<tr>
+    	<th>Valor</th>
+    	<th>Nome completo</th>
+    	</tr>
+    	<tr ng-repeat="participacao in prova.Participantes">
+    		<td>{{participacao.ValorPatrocinio}}</td>
+    		<td>{{participacao.NomeAtleta}}</td>
+    	</tr>
+    </table>
     
-    <br>
-    {{ProvaEdit.$valid}}
     <input type="submit" id="submit" value="Gravar">
 
         

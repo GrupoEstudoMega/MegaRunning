@@ -4,6 +4,7 @@
 
 megaRunningControllers.controller('ProvasListaCtrl', ['$scope', 'Prova', function($scope, Prova) {
   $scope.provas = Prova.query();
+
   $scope.delete = function(id){
   	Prova.delete({id: id});
   	//$scope.provas = Prova.query();
@@ -13,7 +14,13 @@ megaRunningControllers.controller('ProvasListaCtrl', ['$scope', 'Prova', functio
 
 megaRunningControllers.controller('DetalheCtrl', ['$scope', '$routeParams', '$window', 'Prova',
   function($scope, $routeParams, $window, Prova) {
-    $scope.prova = Prova.get({id:$routeParams.id});
+    Prova.get({id:$routeParams.id}).$promise.then(function(prova) {
+    	for (var x = 0; x < prova.Participantes.length; x++) {
+    		prova.Participantes[x].NomeAtleta = prova.Participantes[x].Atleta.Nome.Primeiro + " " + prova.Participantes[x].Atleta.Nome.Sobrenome 
+    	}
+    	$scope.prova = prova
+    })
+
     $scope.submit = function() {
     	$scope.prova.$save({id:$routeParams.id});
     	$window.location.href = '#/provas';

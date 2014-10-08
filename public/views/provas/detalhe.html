@@ -2,14 +2,12 @@
   
   <form name="ProvaEdit" ng-submit="submit()">
     <p>{{prova.id}}</p>
-    Nome: <input type="text" ng-model="prova.Nome" required></input>
-    Local: <input type="text" ng-model="prova.Local" required></input>
+    Nome: <input type="text" ng-model="prova.Nome" required oninvalid="this.setCustomValidity('Campo obrigatório')"></input>
+    Local: <input type="text" ng-model="prova.Local" required oninvalid="this.setCustomValidity('Campo obrigatório')"></input>
     Url: <input type="url" ng-model="prova.Url"></input>
-    Valor: <input type="text" name="valor" ng-model="prova.Valor" smart-float ></input>
+    Valor: <input type="text" name="valor" ng-model="prova.Valor" pattern=/^\-?\d+((\.|\,)\d+)?$/ oninvalid="this.setCustomValidity('Valor inválido')"></input>
     {{prova.Valor}}
     
-    <span ng-show="ProvaEdit.valor.$error.parse">Valor inválido</span>
-
     <br>
     {{ProvaEdit.$valid}}
     <input type="submit" id="submit" value="Gravar">

@@ -5,10 +5,13 @@
 megaRunningControllers.controller('ProvasListaCtrl', ['$scope', 'Prova', function($scope, Prova) {
   $scope.provas = Prova.query();
 
-  $scope.delete = function(id){
-  	Prova.delete({id: id});
-  	//$scope.provas = Prova.query();
-  	$scope.provas.splice($scope.provas.indexOf($scope.prova), 1);
+  $scope.delete = function(prova){
+  	//$scope.prova = Prova.query({id: id});
+    Prova.delete(prova);
+  	
+  	$scope.provas.splice($scope.provas.indexOf(prova), 1);
+    console.log(prova);
+    console.log($scope.provas.indexOf(prova));
   }
 }]);
 

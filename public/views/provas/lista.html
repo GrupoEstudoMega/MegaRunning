@@ -3,7 +3,7 @@
   <ul>
     <li ng-repeat="prova in provas">
             <a href="#/provas/{{prova.id}}">{{prova.Nome}}</a>
-            <button ng-click="delete(prova.id)">Delete</button>
+            <button ng-click="delete(prova)">Delete</button>
     </li>
   </ul>
   <p>Qtde: {{provas.length}}</p>

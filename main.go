@@ -10,9 +10,9 @@ import (
 func main() {
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/provas", prova.Handler) //.Methods("GET")
-	// r.HandleFunc("/api/provas", CreateKittenHandler).Methods("POST")
+	r.HandleFunc("/api/provas", prova.Handler)        //.Methods("GET")
 	r.HandleFunc("/api/provas/{id}", prova.HandlerId) //.Methods("DELETE")
+	r.HandleFunc("/api/provas/{id}/inscricao", prova.HandlerInscricao).Methods("POST")
 	http.Handle("/api/", r)
 
 	// http.HandleFunc("/api/provas")

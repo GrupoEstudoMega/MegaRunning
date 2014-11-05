@@ -13,10 +13,14 @@ megaRunningRoute.config(['$routeProvider',
         templateUrl: 'views/provas/detalhe.html',
         controller: 'NewCtrl'
       }).      
-      when('/provas/:id', {
-        templateUrl: 'views/provas/detalhe.html',
+      when('/provas/:id/edit', {
+        templateUrl: 'views/provas/edit.html',
         controller: 'DetalheCtrl'
       }).
+      when('/provas/:id', {
+        templateUrl: 'views/provas/view.html',
+        controller: 'DetalheCtrl'
+      }).      
       otherwise({
         redirectTo: '/'
       });

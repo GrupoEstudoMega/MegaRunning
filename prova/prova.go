@@ -1,6 +1,7 @@
 package prova
 
 import (
+	"../atleta"
 	"../conexao"
 	"encoding/json"
 	"fmt"
@@ -63,6 +64,17 @@ func HandlerId(response http.ResponseWriter, request *http.Request) {
 		err := Delete(id)
 		fmt.Println(err)
 	}
+}
+
+func HandlerInscricao(response http.ResponseWriter, request *http.Request) {
+	atleta := atleta.Atleta{}
+	id := bson.ObjectIdHex(mux.Vars(request)["id"])
+	atleta.Nome = "João Fernando Barros"
+	atleta.Email = "joao.exemplo@mega.com.br"
+	prova := GetProva(id)
+	prova.Participantes = append(prova.Participantes, Participacao{ValorPatrocinio: 0, Atleta: atleta})
+	err := Update(&prova)
+	fmt.Println(err)
 }
 
 func Provas() []Prova {

@@ -1,0 +1,25 @@
+<div>
+  
+  <form name="ProvaEdit" ng-submit="submit()">
+    Nome: <input type="text" ng-model="prova.Nome" required></input>
+    Local: <input type="text" ng-model="prova.Local" required ></input>
+    Url: <input type="url" ng-model="prova.Url"></input>
+    Valor: <input type="number" step="any" name="valor" ng-model="prova.Valor" ng-pattern=/^\-?\d+((\.|\,)\d+)?$/></input>
+
+    <table>
+    	<tr>
+    	<th>Valor</th>
+    	<th>Nome completo</th>
+    	</tr>
+    	<tr ng-repeat="participacao in prova.Participantes">
+    		<td>{{participacao.ValorPatrocinio}}</td>
+    		<td>{{participacao.NomeAtleta}}</td>
+    	</tr>
+    </table>
+
+    
+    <input type="submit" id="submit" value="Gravar">
+        
+  </form>
+</div>
+

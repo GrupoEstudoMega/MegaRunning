@@ -1,0 +1,25 @@
+<div>
+  
+  <form name="ProvaEdit" ng-submit="submit()">
+    <p>Nome: {{prova.Nome}} </p>
+    <p>Local: {{prova.Local}} </p>
+    <p>Url: {{prova.Url}} </p>
+    <p>Valor: {{prova.Valor}} </p>
+
+    <table>
+    	<tr>
+    	<th>Atleta</th>
+    	<th>Nome completo</th>
+    	</tr>
+    	<tr ng-repeat="participacao in prova.Participantes">
+    		<td>{{participacao.ValorPatrocinio}}</td>
+    		<td>{{participacao.NomeAtleta}}</td>
+    	</tr>
+    </table>
+
+    
+    <input type="submit" id="submit" value="Gravar">
+        
+  </form>
+</div>
+

@@ -16,6 +16,9 @@ var collection *mgo.Collection = conexao.GetDb().C("Prova")
 func Handler(response http.ResponseWriter, request *http.Request) {
 	fmt.Println(request.Method)
 	fmt.Println("Entrou no handler")
+	fmt.Println(len(request.Cookies()))
+	token, err := request.Cookie("token")
+	fmt.Println(token.Value, err)
 
 	switch request.Method {
 	case "GET":

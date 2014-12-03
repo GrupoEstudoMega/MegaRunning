@@ -37,9 +37,11 @@
       function handleAuthResult(authResult) {
         var authorizeButton = document.getElementById('authorize-button');
         if (authResult && !authResult.error) {
+          document.cookie="token=" + authResult.access_token
           authorizeButton.style.visibility = 'hidden';
           makeApiCall();
         } else {
+          window.location.replace("/login")
           authorizeButton.style.visibility = '';
           authorizeButton.onclick = handleAuthClick;
         }

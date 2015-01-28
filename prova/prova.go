@@ -3,13 +3,20 @@ package prova
 import (
 	"../atleta"
 	"../conexao"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"net/http"
+	"net/url"
 )
+
+type ValidaToken struct {
+	Error string `json:"error"`
+	Email string `json:"email"`
+}
 
 var collection *mgo.Collection = conexao.GetDb().C("Prova")
 
@@ -19,6 +26,15 @@ func Handler(response http.ResponseWriter, request *http.Request) {
 	fmt.Println(len(request.Cookies()))
 	token, err := request.Cookie("token")
 	fmt.Println(token.Value, err)
+	data := url.Values{}
+	data.Set("access_token", token.Value)
+	//req = http.NewRequest("POST", "https://www.googleapis.com/oauth2/v1/tokeninfo", nil)
+	resp, err := http.Post("https://www.googleapis.com/oauth2/v1/tokeninfo", "application/x-www-form-urlencoded", bytes.NewBufferString(data.Encode()))
+	//req.Header.Set("Content-Type", "application/x-www-form-urlencoded; param="+token)
+	//http.
+	var retorno ValidaToken
+	json.NewDecoder(resp.Body).Decode(&retorno)
+	fmt.Println(retorno.Error, retorno.Email)
 
 	switch request.Method {
 	case "GET":
